@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:homy/constants.dart';
 import 'package:homy/credentials.dart';
 import 'package:homy/screens/main_screen.dart';
+import 'package:homy/utils/arduino1.dart';
 import 'package:homy/utils/weather.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -15,17 +16,18 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   void getWeatherData() async {
     // Fetch the current weather
-    WeatherData weatherData = WeatherData(
-        longitude: longitude, latitude: latitude);
+    WeatherData weatherData =
+        WeatherData(longitude: longitude, latitude: latitude);
     await weatherData.getCurrentTemperature();
+
+    Arduino1 arduino1 = Arduino1();
+    await arduino1.getCurrentData();
 
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) {
-          return MainScreen(
-            weatherData: weatherData,
-          );
+          return MainScreen(weatherData: weatherData, arduino1: arduino1);
         },
       ),
     );

@@ -1,8 +1,8 @@
 import 'package:location/location.dart';
 
 class LocationHelper {
-  double ?latitude;
-  double ?longitude;
+  double? latitude;
+  double? longitude;
 
   Future<void> getCurrentLocation() async {
     Location location = Location();

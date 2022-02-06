@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:homy/utils/arduino1.dart';
 import 'package:homy/utils/weather.dart';
 
 import '../utils/helpers.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({required this.weatherData, Key? key}) : super(key: key);
+  const MainScreen(
+      {required this.weatherData, required this.arduino1, Key? key})
+      : super(key: key);
 
+  final Arduino1 arduino1;
   final WeatherData weatherData;
 
   @override
@@ -18,8 +22,10 @@ class _MainScreenState extends State<MainScreen> {
   late String tempDescription;
   late Icon weatherDisplayIcon;
   late AssetImage backgroundImage;
+  late double arduino1Temperature;
+  late double arduino1Humidity;
 
-  void updateDisplayInfo(WeatherData weatherData) {
+  void updateDisplayInfo(WeatherData weatherData, Arduino1 arduino1) {
     setState(() {
       temperature = weatherData.currentTemperature;
       humidity = weatherData.currentHumidity;
@@ -28,13 +34,15 @@ class _MainScreenState extends State<MainScreen> {
           weatherData.getWeatherDisplayData();
       backgroundImage = weatherDisplayData.weatherImage;
       weatherDisplayIcon = weatherDisplayData.weatherIcon;
+      arduino1Temperature = arduino1.currentTemperature;
+      arduino1Humidity = arduino1.currentHumidity;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    updateDisplayInfo(widget.weatherData);
+    updateDisplayInfo(widget.weatherData, widget.arduino1);
   }
 
   @override
@@ -86,6 +94,33 @@ class _MainScreenState extends State<MainScreen> {
                 style: const TextStyle(color: Colors.white, fontSize: 40.0),
               ),
             ),
+            const Divider(
+              thickness: 10,
+              color: Colors.white24,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(10),
+              child: Center(
+                  child: Text(
+                'Chambre 1',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    decoration: TextDecoration.underline),
+              )),
+            ),
+            Center(
+              child: Text(
+                '${arduino1Temperature.toStringAsFixed(1)}°',
+                style: const TextStyle(color: Colors.white, fontSize: 40.0),
+              ),
+            ),
+            Center(
+              child: Text(
+                '${arduino1Humidity.toStringAsFixed(1)}%',
+                style: const TextStyle(color: Colors.white, fontSize: 40.0),
+              ),
+            )
           ],
         ),
       ),
