@@ -33,7 +33,7 @@ class WeatherData {
       var currentWeather = jsonDecode(data);
 
       try {
-        currentTemperature = currentWeather['main']['temp'];
+        currentTemperature = currentWeather['main']['temp'].toDouble();
         currentCondition = currentWeather['weather'][0]['id'];
         currentHumidity = currentWeather['main']['humidity'];
         currentDescription = currentWeather['weather'][0]['description'];

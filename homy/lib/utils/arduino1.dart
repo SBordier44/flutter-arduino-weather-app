@@ -14,8 +14,8 @@ class Arduino1 {
       var data = jsonDecode(response.body);
 
       try {
-        currentTemperature = data['temperature'];
-        currentHumidity = data['humidity'];
+        currentTemperature = data['temperature'].toDouble();
+        currentHumidity = data['humidity'].toDouble();
       } catch (e) {
         print(e);
       }
