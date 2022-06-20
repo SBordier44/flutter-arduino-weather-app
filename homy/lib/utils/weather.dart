@@ -61,7 +61,7 @@ class WeatherData {
       } else {
         return WeatherDisplayData(
           weatherIcon: kSunIcon,
-          weatherImage: const AssetImage('assets/sunny.png'),
+          weatherImage: const AssetImage('assets/cloudy.png'),
         );
       }
     }

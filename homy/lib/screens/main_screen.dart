@@ -13,10 +13,10 @@ class MainScreen extends StatefulWidget {
   final WeatherData weatherData;
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  MainScreenState createState() => MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class MainScreenState extends State<MainScreen> {
   late double temperature;
   late int humidity;
   late String tempDescription;

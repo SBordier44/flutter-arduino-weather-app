@@ -9,7 +9,6 @@ class Arduino1 {
 
   Future<void> getCurrentData() async {
     Response response = await get(Uri.parse(arduino1Endpoint));
-
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
 
